@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>WinRTXamlToolkit.Controls.DataVisualization</id>
+    <version>1.3.8.0</version>
+    <title>WinRT XAML Toolkit - Data Visualization Controls</title>
+    <authors>Filip Skakun,  Mahmoud Moussa,  Silverlight Toolkit Team</authors>
+    <owners>Filip Skakun,  Mahmoud Moussa,  Silverlight Toolkit Team</owners>
+    <licenseUrl>http://winrtxamltoolkit.codeplex.com/license</licenseUrl>
+    <projectUrl>http://winrtxamltoolkit.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Charting Controls for Windows 8 RTM SDK, ported from the Silverlight Toolkit.</description>
+    <releaseNotes>Charting Controls for Windows 8 RTM SDK, ported from the Silverlight Toolkit.
+
+Features
+- Pie Chart (PieSeries)
+- Column Chart (ColumnSeries)
+- Bar Chart (BarSeries)
+- Line Chart (LineSeries)
+- Area Chart (AreaSeries)
+- Bubble Chart (BubbleSeries)
+- Scatter Chart (ScatterSeries)
+- Stacked Bar Chart (StackedBarSeries)
+- 100% Stacked Bar Chart (Stacked100BarSeries)
+- Stacked Column Chart (StackedColumnSeries)
+- 100% Stacked Column Chart (Stacked100ColumnSeries)
+
+See also
+- WinRTXamlToolkit.Debugging for debugging helpers</releaseNotes>
+    <copyright />
+    <language>en-US</language>
+    <tags>winrt xaml toolkit winrtxamltoolkit xyzzer chart charts pie piechart datavisualization data visualization bar column scatter</tags>
+    <dependencies>
+      <dependency id="WinRTXamlToolkit" version="1.3.8.0" />
+    </dependencies>
+    <references>
+      <reference file="WinRTXamlToolkit.Controls.DataVisualization.dll" />
+    </references>
+  </metadata>
+</package>

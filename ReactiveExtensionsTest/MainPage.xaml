@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="ReactiveExtensionsTest.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ReactiveExtensionsTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
+    xmlns:converters="using:ReactiveExtensionsTest.Converters"
+    mc:Ignorable="d">
+    
+    <Page.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Style x:Key="DataPointStyle" TargetType="toolkit:LineDataPoint">
+            <Setter
+                                Property="BorderThickness"
+                                Value="0" />
+            <Setter
+                                Property="IsTabStop"
+                                Value="False" />
+            <Setter
+                                Property="Width"
+                                Value="0" />
+            <Setter
+                                Property="Height"
+                                Value="0" />
+            <Setter
+                                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+                                        TargetType="toolkit:LineDataPoint">
+                        <Grid
+                                            x:Name="Root"
+                                            Opacity="0" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MSDataPointStyle" TargetType="toolkit:LineDataPoint" BasedOn="{StaticResource DataPointStyle}">
+            <Setter Property="Background"
+                        Value="Red"/>
+        </Style>
+        <Style x:Key="YHDataPointStyle" TargetType="toolkit:LineDataPoint" BasedOn="{StaticResource MSDataPointStyle}">
+            <Setter Property="Background"
+                        Value="Goldenrod"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Name="canvas" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+            <toolkit:Chart Title="Stock Ticker"
+                       Margin="20, 80"
+                       Grid.Row="1">
+            <toolkit:LineSeries ItemsSource="{Binding MSFTStock}"
+                                Title="Microsoft"
+                                IndependentValueBinding="{Binding Date}"
+                                DependentValueBinding="{Binding Close}"
+                                DataPointStyle="{StaticResource MSDataPointStyle}"/>
+            <toolkit:LineSeries ItemsSource="{Binding YHOOStock}"
+                                Title="Yahoo"
+                                IndependentValueBinding="{Binding Date}"
+                                DependentValueBinding="{Binding Close}"
+                                DataPointStyle="{StaticResource YHDataPointStyle}"/>
+        </toolkit:Chart>
+        
+        <TextBlock Text="Click Load Data to Begin" 
+                   Visibility="{Binding CanLoadData, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Grid.Row="1"/>
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <AppBar IsSticky="True"
+                IsOpen="True">
+            <Grid>
+                <StackPanel HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                    <Button Style="{StaticResource DownloadAppBarButtonStyle}"
+                            Command="{Binding LoadDataCommand}"
+                            Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+                            AutomationProperties.Name="Load Data"/>
+                    <Button Style="{StaticResource StopAppBarButtonStyle}"
+                            Command="{Binding CancelCommand}"
+                            Visibility="{Binding RelativeSource={RelativeSource Mode=Self}, Path=IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}"
+                            AutomationProperties.Name="Cancel"/>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+</Page>
